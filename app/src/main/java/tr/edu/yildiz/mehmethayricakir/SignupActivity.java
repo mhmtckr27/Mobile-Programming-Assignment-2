@@ -216,6 +216,19 @@ public class SignupActivity extends AppCompatActivity implements Serializable {
                     MainActivity.users.add(user);
                     Intent intent = new Intent(SignupActivity.this, MainActivity.class);
                     startActivity(intent);
+                    /*Thread thread = new Thread(){
+                        @Override
+                        public void run() {
+                            try {
+                                Thread.sleep(Toast.LENGTH_SHORT);
+                                SignupActivity.this.finish();
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    };
+                    thread.start();*/
+                    finish();
                 }
                 else{
                     Toast.makeText(SignupActivity.this, "Signup failed!", Toast.LENGTH_SHORT).show();
@@ -314,5 +327,12 @@ public class SignupActivity extends AppCompatActivity implements Serializable {
             }
         }
         return false;
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(SignupActivity.this, MainActivity.class);
+        startActivity(intent);
+        finish();
     }
 }

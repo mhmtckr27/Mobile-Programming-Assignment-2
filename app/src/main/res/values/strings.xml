@@ -6,7 +6,7 @@
     <string name="signup_button">SIGNUP</string>
     <string name="name_edit_text_hint">Name</string>
     <string name="surname_edit_text_hint">Surname</string>
-    <string name="phone_number_edit_text_hint">Phone number</string>
+    <string name="phone_number_edit_text_hint">+12345678901</string>
     <string name="reenter_password_edit_text_hint">Re-Enter password</string>
     <string name="birth_date_edit_text_hint">DD/MM/YYYY</string>
     <string name="birth_date_spinner_title">Birth Date</string>
@@ -46,4 +46,5 @@
     <string name="menu_home">Home</string>
     <string name="menu_gallery">Gallery</string>
     <string name="menu_slideshow">Slideshow</string>
+    <string name="logout">Log out</string>
 </resources>

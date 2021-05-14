@@ -7,7 +7,6 @@ import android.net.Uri;
 import android.os.Bundle;
 
 import android.view.View;
-import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -90,18 +89,21 @@ public class MainActivity extends AppCompatActivity {
                 Intent intent = new Intent(v.getContext(), SignupActivity.class);
                 intent.putExtra("emailAddress", email.getText().toString());
                 startActivity(intent);
+                finish();
             }
         });
     }
 
     private void onLoginAttempt(View view){
-        if(isCredentialsValid()){
+        int userIndex = getUserIndex();
+        if(getUserIndex() != -1){
             //loginsuccessfull
             currentLoginAttemptCount = 0;
             Toast.makeText(MainActivity.this, "Welcome onboard " + email.getText().toString() + "!", Toast.LENGTH_SHORT).show();
-            Intent intent = new Intent(view.getContext(), RecyclerViewActivity.class);
-            intent.putExtra("userEmailAddress", email.getText().toString());
-            startActivity(intent);
+            Intent intent = new Intent(view.getContext(), MenuActivity.class);
+            intent.putExtra("userIndex", userIndex);
+            startActivityForResult(intent,1);
+            finish();
         }
         else{
             password.setText("");
@@ -113,13 +115,13 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    private boolean isCredentialsValid(){
+    private int getUserIndex(){
         for (User user : users) {
             if(user.getEmail().equals(email.getText().toString()) && user.getPassword().equals(User.md5(password.getText().toString()))){
-                return true;
+                return users.indexOf(user);
             }
         }
-        return false;
+        return -1;
     }
 
     public ArrayList<User> createUsers() {
@@ -179,4 +181,9 @@ public class MainActivity extends AppCompatActivity {
             }
         }
     }
+
+   /* @Override
+    public void onBackPressed() {
+        finishAffinity();
+    }*/
 }

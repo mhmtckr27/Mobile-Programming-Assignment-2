@@ -11,11 +11,12 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.MobilProgramlama">
+        android:theme="@style/Theme.MobilProgramlama.NoActionBar">
         <activity
             android:name=".MenuActivity"
             android:label="@string/title_activity_menu"
-            android:theme="@style/Theme.MobilProgramlama.NoActionBar"></activity>
+            android:theme="@style/Theme.MobilProgramlama.NoActionBar.NoActionBar">
+        </activity>
         <activity android:name=".RecyclerViewActivity" />
         <activity android:name=".AddQuestionActivity" />
         <activity android:name=".SignupActivity" />
