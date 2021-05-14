@@ -7,7 +7,7 @@
     <string name="name_edit_text_hint">Name</string>
     <string name="surname_edit_text_hint">Surname</string>
     <string name="phone_number_edit_text_hint">Phone number</string>
-    <string name="reenter_password_edit_text_hint">Reenter password</string>
+    <string name="reenter_password_edit_text_hint">Re-Enter password</string>
     <string name="birth_date_edit_text_hint">DD/MM/YYYY</string>
     <string name="birth_date_spinner_title">Birth Date</string>
     <string name="already_have_an_account">Already have an account?</string>
@@ -31,4 +31,19 @@
     <string name="button_show_text">Show</string>
     <string name="signup_attach_text">ADD PHOTO</string>
     <string name="users">Users</string>
+    <string name="birth_date_text_view">Birth Date</string>
+    <string name="email_text_view">Email Address</string>
+    <string name="phone_number_text_view">Phone Number</string>
+    <string name="reenter_password_text_view">Re-Enter Pasword</string>
+    <string name="title_activity_menu">MenuActivity</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="menu_home">Home</string>
+    <string name="menu_gallery">Gallery</string>
+    <string name="menu_slideshow">Slideshow</string>
 </resources>

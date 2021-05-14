@@ -203,9 +203,9 @@ public class SignupActivity extends AppCompatActivity implements Serializable {
             if (isCredentialsValid()) {
                 //signup successful
                 String[] bdate = birthDate.getText().toString().split("/");
-                int year = Integer.parseInt(bdate[0]);
+                int day = Integer.parseInt(bdate[0]);
                 int month = Integer.parseInt(bdate[1]);
-                int day = Integer.parseInt(bdate[2]);
+                int year = Integer.parseInt(bdate[2]);
 
                 String photoPath = getApplicationContext().getFilesDir() + "/Photos/" + email.getText().toString() + ".png";
                 User user = new User(name.getText().toString(), surname.getText().toString(), email.getText().toString(), phoneNumber.getText().toString(), new Date(year, month, day), md5(password.getText().toString()), photoPath);

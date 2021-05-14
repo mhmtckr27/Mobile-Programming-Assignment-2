@@ -12,7 +12,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="SIGNUP"
+        android:text="@string/signup_button"
         android:gravity="center"
         android:textSize="30sp"
         android:textColor="@color/pumpkin"
@@ -68,7 +68,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="@string/email_edit_text_hint"
+            android:text="@string/email_text_view"
             android:textSize="15sp"
             android:textColor="@color/carrot"/>
         <EditText
@@ -89,7 +89,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="@string/phone_number_edit_text_hint"
+            android:text="@string/phone_number_text_view"
             android:textSize="15sp"
             android:textColor="@color/carrot"/>
         <EditText
@@ -131,7 +131,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="@string/reenter_password_edit_text_hint"
+            android:text="@string/reenter_password_text_view"
             android:textSize="14sp"
             android:textColor="@color/carrot"/>
         <EditText
@@ -152,7 +152,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="@string/birth_date_edit_text_hint"
+            android:text="@string/birth_date_text_view"
             android:textSize="15sp"
             android:textColor="@color/carrot"/>
         <EditText

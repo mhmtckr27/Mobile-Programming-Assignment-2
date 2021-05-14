@@ -9,6 +9,15 @@
     android:gravity="center"
     tools:context="tr.edu.yildiz.mehmethayricakir.MainActivity">
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/login_button"
+        android:gravity="center"
+        android:textSize="30sp"
+        android:textColor="@color/pumpkin"
+        android:fontFamily="serif"
+        android:layout_marginBottom="50dp"/>
 
     <EditText
         android:id="@+id/email_edit_text"
