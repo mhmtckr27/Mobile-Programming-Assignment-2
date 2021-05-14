@@ -2,12 +2,17 @@ package tr.edu.yildiz.mehmethayricakir;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 
-import android.content.Context;
+import android.Manifest;
+import android.app.Activity;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.telephony.PhoneNumberFormattingTextWatcher;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -16,14 +21,13 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.File;
-import java.io.FileNotFoundException;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.ObjectOutputStream;
 import java.io.OutputStream;
 import java.io.Serializable;
-import java.security.MessageDigest;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -34,7 +38,7 @@ public class SignupActivity extends AppCompatActivity implements Serializable {
     EditText surname;
     EditText email;
     EditText phoneNumber;
-    DatePicker birthDate;
+    EditText birthDate;
     EditText password;
     EditText reEnterPassword;
     Button signUp;
@@ -43,6 +47,12 @@ public class SignupActivity extends AppCompatActivity implements Serializable {
     Button attachPhoto;
     static final int ATTACH_FILE = 1;
     Uri photoUri;
+
+    private static final int REQUEST_EXTERNAL_STORAGE = 1;
+    private static final String[] PERMISSIONS_STORAGE = {
+            Manifest.permission.READ_EXTERNAL_STORAGE,
+            Manifest.permission.WRITE_EXTERNAL_STORAGE
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,13 +71,13 @@ public class SignupActivity extends AppCompatActivity implements Serializable {
         surname = findViewById(R.id.surname_edit_text);
         email = findViewById(R.id.email_edit_text);
         phoneNumber = findViewById(R.id.phone_number_edit_text);
-        birthDate = findViewById(R.id.birth_date_picker);
         password = findViewById(R.id.password_edit_text);
         reEnterPassword = findViewById(R.id.reenter_password_edit_text);
         signUp = findViewById(R.id.signup_button);
         login = findViewById(R.id.login_button);
         attachPhoto = findViewById(R.id.attach_photo_button);
         attachedFileName = findViewById(R.id.attached_file_name_text);
+        birthDate = findViewById(R.id.birth_date_edit_text);
     }
 
     private void bindButtons() {
@@ -87,16 +97,79 @@ public class SignupActivity extends AppCompatActivity implements Serializable {
         attachPhoto.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                // verifyStoragePermissions(SignupActivity.this);
                 Intent intent = new Intent();
                 intent.setType("*/*");
                 intent.setAction(Intent.ACTION_GET_CONTENT);
-                String[] mimeTypes = { "image/*" };
+                String[] mimeTypes = {"image/*"};
                 intent.putExtra(Intent.EXTRA_MIME_TYPES, mimeTypes);
                 intent.putExtra("return-data", true);
                 startActivityForResult(Intent.createChooser(intent, "Complete action using"), ATTACH_FILE);
             }
         });
         phoneNumber.addTextChangedListener(new PhoneNumberFormattingTextWatcher());
+
+        TextWatcher tw = new TextWatcher() {
+            private String current = "";
+            private String ddmmyyyy = "DDMMYYYY";
+            private Calendar cal = Calendar.getInstance();
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if (!s.toString().equals(current)) {
+                    String clean = s.toString().replaceAll("[^\\d.]|\\.", "");
+                    String cleanC = current.replaceAll("[^\\d.]|\\.", "");
+
+                    int cl = clean.length();
+                    int sel = cl;
+                    for (int i = 2; i <= cl && i < 6; i += 2) {
+                        sel++;
+                    }
+                    //Fix for pressing delete next to a forward slash
+                    if (clean.equals(cleanC)) sel--;
+
+                    if (clean.length() < 8) {
+                        clean = clean + ddmmyyyy.substring(clean.length());
+                    } else {
+                        //This part makes sure that when we finish entering numbers
+                        //the date is correct, fixing it otherwise
+                        int day = Integer.parseInt(clean.substring(0, 2));
+                        int mon = Integer.parseInt(clean.substring(2, 4));
+                        int year = Integer.parseInt(clean.substring(4, 8));
+
+                        mon = mon < 1 ? 1 : mon > 12 ? 12 : mon;
+                        cal.set(Calendar.MONTH, mon - 1);
+                        year = (year < 1900) ? 1900 : (year > 2100) ? 2100 : year;
+                        cal.set(Calendar.YEAR, year);
+                        // ^ first set year for the line below to work correctly
+                        //with leap years - otherwise, date e.g. 29/02/2012
+                        //would be automatically corrected to 28/02/2012
+
+                        day = (day > cal.getActualMaximum(Calendar.DATE)) ? cal.getActualMaximum(Calendar.DATE) : day;
+                        clean = String.format("%02d%02d%02d", day, mon, year);
+                    }
+
+                    clean = String.format("%s/%s/%s", clean.substring(0, 2),
+                            clean.substring(2, 4),
+                            clean.substring(4, 8));
+
+                    sel = sel < 0 ? 0 : sel;
+                    current = clean;
+                    birthDate.setText(current);
+                    birthDate.setSelection(sel < current.length() ? sel : current.length());
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        };
+        birthDate.addTextChangedListener(tw);
     }
 
     @Override
@@ -110,18 +183,37 @@ public class SignupActivity extends AppCompatActivity implements Serializable {
             }
         }
     }
-    private void onSignupAttempt(View view) {
 
+    public static void verifyStoragePermissions(Activity activity) {
+        // Check if we have write permission
+        int permission = ActivityCompat.checkSelfPermission(activity, Manifest.permission.WRITE_EXTERNAL_STORAGE);
+
+        if (permission != PackageManager.PERMISSION_GRANTED) {
+            // We don't have permission so prompt the user
+            ActivityCompat.requestPermissions(
+                    activity,
+                    PERMISSIONS_STORAGE,
+                    REQUEST_EXTERNAL_STORAGE
+            );
+        }
+    }
+
+    private void onSignupAttempt(View view) {
         if (!isUserExists()) {
             if (isCredentialsValid()) {
                 //signup successful
-                int year = birthDate.getYear();
-                int month = birthDate.getMonth() + 1;
-                int day = birthDate.getDayOfMonth();
-                //MainActivity.users.add(new User(name.getText().toString(), surname.getText().toString(), email.getText().toString(), phoneNumber.getText().toString(), new Date(year, month, day), md5(password.getText().toString()), photoUri));
-                User user = new User(name.getText().toString(), surname.getText().toString(), email.getText().toString(), phoneNumber.getText().toString(), new Date(year, month, day), md5(password.getText().toString()), photoUri);
+                String[] bdate = birthDate.getText().toString().split("/");
+                int year = Integer.parseInt(bdate[0]);
+                int month = Integer.parseInt(bdate[1]);
+                int day = Integer.parseInt(bdate[2]);
+
+                String photoPath = getApplicationContext().getFilesDir() + "/Photos/" + email.getText().toString() + ".png";
+                User user = new User(name.getText().toString(), surname.getText().toString(), email.getText().toString(), phoneNumber.getText().toString(), new Date(year, month, day), md5(password.getText().toString()), photoPath);
+                if (copyUserPhoto()) return;
+
                 if(addUser(user)){
                     Toast.makeText(SignupActivity.this, "Signup successful!", Toast.LENGTH_SHORT).show();
+                    MainActivity.users.add(user);
                     Intent intent = new Intent(SignupActivity.this, MainActivity.class);
                     startActivity(intent);
                 }
@@ -132,18 +224,22 @@ public class SignupActivity extends AppCompatActivity implements Serializable {
         }
     }
 
-    public boolean addUser(User user){
+    private boolean copyUserPhoto() {
         try{
-            copy(user.getPhoto_uri(), new File(MainActivity.photosPath + "/" + email.getText().toString() + ".png"));
+            copy(photoUri, new File(getApplicationContext().getFilesDir(), "/Photos/" + email.getText().toString() + ".png"));
         }
         catch (Exception e){
             e.printStackTrace();
-            return false;
+            Toast.makeText(SignupActivity.this, "Signup failed! (Select photo error)", Toast.LENGTH_SHORT).show();
+            return true;
         }
+        return false;
+    }
 
-      /*  FileOutputStream fos = null;
+    public boolean addUser(User user){
+        FileOutputStream fos = null;
         try {
-            fos = getApplicationContext().openFileOutput(MainActivity.usersPath + "/", Context.MODE_PRIVATE);
+            fos = new FileOutputStream(getApplicationContext().getFilesDir() + "/users", true);
             ObjectOutputStream os = new ObjectOutputStream(fos);
             os.writeObject(user);
             os.close();
@@ -151,13 +247,12 @@ public class SignupActivity extends AppCompatActivity implements Serializable {
         } catch (IOException e) {
             e.printStackTrace();
             return false;
-        }*/
+        }
         return true;
     }
 
-    public void copy(Uri photoUri, File dst) throws IOException {
-
-        try (InputStream in = getContentResolver().openInputStream(photoUri);) {
+    public void copy(Uri src, File dst) throws IOException {
+        try (InputStream in = getContentResolver().openInputStream(src)) {
             try (OutputStream out = new FileOutputStream(dst)) {
                 // Transfer bytes from in to out
                 byte[] buf = new byte[1024];

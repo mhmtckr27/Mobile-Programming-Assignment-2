@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginHorizontal="35dp"
+    android:layout_marginHorizontal="20dp"
     android:orientation="vertical"
     android:gravity="center"
     tools:context="tr.edu.yildiz.mehmethayricakir.SignupActivity">
@@ -16,61 +16,155 @@
         android:gravity="center"
         android:textSize="30sp"
         android:textColor="@color/pumpkin"
-        android:fontFamily="serif"/>
-    <EditText
-        android:id="@+id/name_edit_text"
+        android:fontFamily="serif"
+        android:layout_marginBottom="50dp"/>
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="20sp"
-        android:hint="@string/name_edit_text_hint"
-        android:inputType="text"/>
-    <EditText
-        android:id="@+id/surname_edit_text"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/name_edit_text_hint"
+            android:textSize="15sp"
+            android:textColor="@color/carrot"/>
+        <EditText
+            android:id="@+id/name_edit_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:hint="@string/name_edit_text_hint"
+            android:inputType="text"
+            android:layout_weight="0.5"/>
+    </LinearLayout>
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="20sp"
-        android:hint="@string/surname_edit_text_hint"
-        android:inputType="text"/>
-    <EditText
-        android:id="@+id/email_edit_text"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/surname_edit_text_hint"
+            android:textSize="15sp"
+            android:textColor="@color/carrot"/>
+        <EditText
+            android:id="@+id/surname_edit_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:hint="@string/surname_edit_text_hint"
+            android:inputType="text"
+            android:layout_weight="0.5"/>
+    </LinearLayout>
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="20sp"
-        android:hint="@string/email_edit_text_hint"
-        android:inputType="textEmailAddress"/>
-    <EditText
-        android:id="@+id/phone_number_edit_text"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/email_edit_text_hint"
+            android:textSize="15sp"
+            android:textColor="@color/carrot"/>
+        <EditText
+            android:id="@+id/email_edit_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:hint="@string/email_edit_text_hint"
+            android:inputType="textEmailAddress"
+            android:layout_weight="0.5"/>
+    </LinearLayout>
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="20sp"
-        android:hint="@string/phone_number_edit_text_hint"
-        android:inputType="phone"/>
-    <TextView
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/phone_number_edit_text_hint"
+            android:textSize="15sp"
+            android:textColor="@color/carrot"/>
+        <EditText
+            android:id="@+id/phone_number_edit_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:hint="@string/phone_number_edit_text_hint"
+            android:inputType="phone"
+            android:layout_weight="0.5"/>
+    </LinearLayout>
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="20sp"
-        android:text="@string/birth_date_spinner_title"
-        android:gravity="center"/>
-    <DatePicker
-        android:id="@+id/birth_date_picker"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/password_edit_text_hint"
+            android:textSize="15sp"
+            android:textColor="@color/carrot"/>
+        <EditText
+            android:id="@+id/password_edit_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:hint="@string/password_edit_text_hint"
+            android:inputType="textPassword"
+            android:layout_weight="0.5"/>
+    </LinearLayout>
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:calendarViewShown="false"
-        android:datePickerMode="spinner"/>
-    <EditText
-        android:id="@+id/password_edit_text"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/reenter_password_edit_text_hint"
+            android:textSize="14sp"
+            android:textColor="@color/carrot"/>
+        <EditText
+            android:id="@+id/reenter_password_edit_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:hint="@string/reenter_password_edit_text_hint"
+            android:inputType="textPassword"
+            android:layout_weight="0.5"/>
+    </LinearLayout>
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="20sp"
-        android:hint="@string/password_edit_text_hint"
-        android:inputType="textPassword"/>
-    <EditText
-        android:id="@+id/reenter_password_edit_text"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="20sp"
-        android:hint="@string/reenter_password_edit_text_hint"
-        android:inputType="textPassword"/>
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/birth_date_edit_text_hint"
+            android:textSize="15sp"
+            android:textColor="@color/carrot"/>
+        <EditText
+            android:id="@+id/birth_date_edit_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="date"
+            android:layout_weight="0.5"
+            android:textSize="20sp"
+            android:hint="@string/birth_date_edit_text_hint"/>
+    </LinearLayout>
+
     <TextView
         android:id="@+id/attached_file_name_text"
         android:layout_width="match_parent"

@@ -25,7 +25,7 @@ public class RecyclerViewActivity extends AppCompatActivity {
         recyclerView = findViewById(R.id.recycler_view);
         layoutManager = new LinearLayoutManager(getApplicationContext());
         recyclerView.setLayoutManager(layoutManager);
-        users = MainActivity.createUsers();
+        users = MainActivity.users;
         recyclerView.setAdapter(new UserAdapter(getApplicationContext(), users));
     }
 }

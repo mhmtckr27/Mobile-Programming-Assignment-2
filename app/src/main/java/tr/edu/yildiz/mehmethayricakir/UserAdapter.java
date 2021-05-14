@@ -1,6 +1,9 @@
 package tr.edu.yildiz.mehmethayricakir;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,8 +14,8 @@ import android.widget.ToggleButton;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.io.File;
 import java.util.ArrayList;
-import java.util.List;
 
 public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder> {
 
@@ -49,7 +52,14 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder
     public void onBindViewHolder(@NonNull UserViewHolder holder, int position) {
         holder.emailAddress.setText(users.get(position).getEmail());
         holder.password.setText(users.get(position).getPassword());
-        holder.userImage.setImageURI(users.get(position).getPhoto_uri());
+
+        File imgFile = new File(users.get(position).getPhotoPath());
+        if(imgFile.exists()){
+            Bitmap myBitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
+            holder.userImage.setImageBitmap(myBitmap);
+        }
+
+     //   holder.userImage.setImageResource(Uri.fromFile());
         holder.showHideButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

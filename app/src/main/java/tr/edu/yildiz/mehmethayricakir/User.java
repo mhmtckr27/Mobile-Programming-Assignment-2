@@ -1,43 +1,54 @@
 package tr.edu.yildiz.mehmethayricakir;
 
-import android.graphics.drawable.Drawable;
 import android.net.Uri;
+import android.widget.Toast;
 
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.io.Serializable;
 import java.security.MessageDigest;
 import java.util.Date;
 
-public class User {
-    String name;
-    String surname;
-    String email;
-    String phoneNumber;
-    Date birthDate;
-    String password;
-    Uri photo_uri;
+public class User implements Serializable {
+    private static final long serialVersionUID = 6529685098267757690L;
+    private String name;
+    private String surname;
+    private String email;
+    private String phoneNumber;
+    private Date birthDate;
+    private String password;
+    //private Uri photoUri;
+    private String photoPath;
 
-    public Uri getPhoto_uri() {
-        return photo_uri;
+    public String getPhotoPath() {
+        return photoPath;
     }
 
-    public void setPhoto_uri(Uri photo_uri) {
-        this.photo_uri = photo_uri;
+    public void setPhotoPath(String photoPath) {
+        this.photoPath = photoPath;
     }
 
+/*
+    public Uri getPhotoUri() {
+        return photoUri;
+    }
 
-    public User(String name, String surname, String email, String phoneNumber, Date birthDate, String password, Uri photo_uri) {
+    public void setPhotoUri(Uri photoUri) {
+        this.photoUri = photoUri;
+    }
+*/
+
+    public User(String name, String surname, String email, String phoneNumber, Date birthDate, String password, String photoPath) {
         this.name = name;
         this.surname = surname;
         this.email = email;
         this.phoneNumber = phoneNumber;
         this.birthDate = birthDate;
         this.password = password;
-        this.photo_uri = photo_uri;
+        this.photoPath = photoPath;
     }
 
     public String getName() {
