@@ -18,7 +18,6 @@
             android:theme="@style/Theme.MobilProgramlama.NoActionBar.NoActionBar">
         </activity>
         <activity android:name=".RecyclerViewActivity" />
-        <activity android:name=".AddQuestionActivity" />
         <activity android:name=".SignupActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>

@@ -44,6 +44,6 @@ public class ListQuestionsFragment extends Fragment {
         layoutManager = new LinearLayoutManager(getActivity().getApplicationContext());
         recyclerView.setLayoutManager(layoutManager);
         questions = MenuActivity.questions;
-        recyclerView.setAdapter(new QuestionAdapter(getActivity(), questions));
+        recyclerView.setAdapter(new QuestionAdapter(getActivity(), questions, false, 0));
     }
 }

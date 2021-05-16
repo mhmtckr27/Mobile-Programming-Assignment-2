@@ -116,7 +116,11 @@ public class MenuActivity extends AppCompatActivity {
         fab_e.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                loadFragment(R.id.nav_add_exam, MenuActivity.this, null);
+                expandFabs(R.drawable.ic_plus, GONE);
+                fab.setVisibility(GONE);
+                fab_q.setVisibility(GONE);
+                fab_e.setVisibility(GONE);
             }
         });
     }
@@ -154,7 +158,6 @@ public class MenuActivity extends AppCompatActivity {
             ObjectOutputStream os = new ObjectOutputStream(fos);;
             for(Question newQuestion : MenuActivity.questions){
                 os.writeObject(newQuestion);
-                System.out.println("anani");
             }
             if (os != null) {
                 os.close();
@@ -175,7 +178,6 @@ public class MenuActivity extends AppCompatActivity {
                 while(true){
                     Question question = (Question) is.readObject();
                     questions.add(question);
-                    System.out.println("yetheeeeerrrrrrrrrr");
                     //fis = new FileInputStream(getApplicationContext().getFilesDir() + "/Questions/" + MenuActivity.currentUser.getEmail() + "/questions");
                 }
             }

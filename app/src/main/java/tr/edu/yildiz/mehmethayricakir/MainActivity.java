@@ -57,12 +57,9 @@ public class MainActivity extends AppCompatActivity {
 
         users.clear();
         readUsersFromFile();
-        System.out.println("before:" + users.size());
         if(users == null || users.size() == 0){
             users = createUsers();
         }
-
-        System.out.println("after:" + users.size());
     }
     private void readUsersFromFile() {
         FileInputStream fis = null;
@@ -75,7 +72,6 @@ public class MainActivity extends AppCompatActivity {
                 while(true){
                     is = new ObjectInputStream(fis);
                     User user = (User) is.readObject();
-                    System.out.println(user.getEmail());
                     users.add(user);
                 }
             }catch (EOFException e){

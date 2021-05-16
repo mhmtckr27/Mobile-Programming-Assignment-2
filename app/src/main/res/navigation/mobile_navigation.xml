@@ -28,6 +28,12 @@
         android:id="@+id/nav_exam_prefs"
         android:name="tr.edu.yildiz.mehmethayricakir.ui.exampreferences.ExamPreferencesFragment"
         android:label="@string/exam_prefs"
-        tools:layout="@layout/fragment_exam_preferences"
-        />
+        tools:layout="@layout/fragment_exam_preferences"/>
+
+    <fragment
+        android:id="@+id/nav_add_exam"
+        android:name="tr.edu.yildiz.mehmethayricakir.ui.addexam.AddExamFragment"
+        android:label="@string/add_exam"
+        tools:layout="@layout/fragment_add_exam"/>
+
 </navigation>

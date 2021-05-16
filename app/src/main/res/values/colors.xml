@@ -9,5 +9,6 @@
     <color name="white">#FFFFFFFF</color>
     <color name="semi_transparant_black">#80FFFFFF</color>
     <color name="radio_button_disabled">#334E4E4E</color>
-    <color name="question_selected">#80EFFF96</color>
+    <color name="question_selected">#FFFFFF</color>
+    <color name="question_deselected">#16000000</color>
 </resources>

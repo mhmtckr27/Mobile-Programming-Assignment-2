@@ -60,4 +60,7 @@
     <string name="question_points">Question Points</string>
     <string name="question_difficulty">Question Difficulty</string>
     <string name="save_exam_prefs">SAVE</string>
+    <string name="load_questions">LOAD QUESTIONS</string>
+    <string name="add_exam">Create Exam</string>
+    <string name="create_exam">CREATE EXAM</string>
 </resources>

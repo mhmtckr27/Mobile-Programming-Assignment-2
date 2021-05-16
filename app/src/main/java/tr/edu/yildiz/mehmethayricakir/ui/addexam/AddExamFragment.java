@@ -1,4 +1,4 @@
-package tr.edu.yildiz.mehmethayricakir.ui.exampreferences;
+package tr.edu.yildiz.mehmethayricakir.ui.addexam;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -6,6 +6,8 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,31 +18,40 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.slider.RangeSlider;
 import com.google.android.material.slider.Slider;
 
+import java.util.ArrayList;
+
+import tr.edu.yildiz.mehmethayricakir.MenuActivity;
+import tr.edu.yildiz.mehmethayricakir.Question;
+import tr.edu.yildiz.mehmethayricakir.QuestionAdapter;
 import tr.edu.yildiz.mehmethayricakir.R;
 
 import static android.view.View.GONE;
 
-public class ExamPreferencesFragment extends Fragment {
-
+public class AddExamFragment extends Fragment {
     View root;
+    RecyclerView.LayoutManager layoutManager;
+    RecyclerView recyclerView;
+    ArrayList<Question> questions;
     EditText examDurationInMinutes;
     EditText questionPoints;
     Slider questionDifficulty;
     TextView questionDifficultyText;
-    Button saveExamPrefs;
-    FloatingActionButton fab;
+    Button loadQuestions;
+    Button createExam;
     SharedPreferences sharedPreferences;
+    FloatingActionButton fab;
 
-    @Override
+
+    public static int currentSelectedQuestionCount;
+
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        root = inflater.inflate(R.layout.fragment_exam_preferences, container, false);
-
+        root = inflater.inflate(R.layout.fragment_add_exam, container, false);
         sharedPreferences = root.getContext().getSharedPreferences(root.getContext().getPackageName(), Context.MODE_PRIVATE);
         bindVariables();
+        currentSelectedQuestionCount = 0;
         if(fab != null){
             fab.setVisibility(GONE);
             getActivity().findViewById(R.id.fab_q).setVisibility(GONE);
@@ -50,11 +61,17 @@ public class ExamPreferencesFragment extends Fragment {
     }
 
     private void bindVariables(){
+        recyclerView = root.findViewById(R.id.recycler_view);
+        layoutManager = new LinearLayoutManager(getActivity().getApplicationContext());
+        recyclerView.setLayoutManager(layoutManager);
+        questions = MenuActivity.questions;
+
         examDurationInMinutes = root.findViewById(R.id.exam_duration_in_minutes);
         questionPoints = root.findViewById(R.id.question_points);
         questionDifficulty = root.findViewById(R.id.question_difficulty_slider);
         questionDifficultyText = root.findViewById(R.id.question_difficulty_text);
-        saveExamPrefs = root.findViewById(R.id.save_exam_prefs_button);
+        loadQuestions = root.findViewById(R.id.save_exam_prefs_button);
+        createExam = root.findViewById(R.id.create_exam_button);
 
         questionDifficulty.setValueFrom(2);
         questionDifficulty.setValueTo(5);
@@ -79,7 +96,7 @@ public class ExamPreferencesFragment extends Fragment {
             }
         });
 
-        saveExamPrefs.setOnClickListener(new View.OnClickListener() {
+        loadQuestions.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if(areFieldsValid()){
@@ -87,18 +104,29 @@ public class ExamPreferencesFragment extends Fragment {
                     int questionPointsInt = Integer.parseInt(questionPoints.getText().toString());
                     int questionDifficultyInt = Integer.parseInt(questionDifficultyText.getText().toString());
 
-                    SharedPreferences.Editor editor = sharedPreferences.edit();
-                    editor.putInt("examDurationInt", examDurationInt);
-                    editor.putInt("questionPointsInt", questionPointsInt);
-                    editor.putInt("questionDifficultyInt", questionDifficultyInt);
-                    editor.apply();
-                    Toast.makeText(getActivity(), "Exam preferences saved successfully!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), "Loading questions...", Toast.LENGTH_SHORT).show();
+
+                    recyclerView.setAdapter(new QuestionAdapter(getActivity(), questions, true, questionDifficultyInt));
                 }
                 else{
                     Toast.makeText(getActivity(), "Please fill in all fields!", Toast.LENGTH_SHORT).show();
                 }
             }
         });
+
+        createExam.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(currentSelectedQuestionCount <= 0){
+                    Toast.makeText(getActivity(), "Please select at least 1 question!!!", Toast.LENGTH_SHORT).show();
+                }
+                else{
+                    Toast.makeText(getActivity(), "Exam created successfully!", Toast.LENGTH_SHORT).show();
+                    MenuActivity.instance.loadFragment(R.id.nav_home, getActivity(), null);
+                }
+            }
+        });
+
         if(getActivity() != null){
             fab = getActivity().findViewById(R.id.fab);
         }
