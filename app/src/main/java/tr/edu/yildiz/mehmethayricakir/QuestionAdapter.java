@@ -29,10 +29,12 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.UserVi
 
     Context context;
     ArrayList<Question> questions;
+    boolean isCreatingExamList;
 
-    public QuestionAdapter(Context context, ArrayList<Question> questions){
+    public QuestionAdapter(Context context, ArrayList<Question> questions, boolean isCreatingExamList){
         this.context = context;
         this.questions = questions;
+        this.isCreatingExamList = isCreatingExamList;
     }
 
     public static class UserViewHolder extends RecyclerView.ViewHolder{

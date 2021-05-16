@@ -2,187 +2,215 @@
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="10dp">
+    android:layout_margin="10dp"
+    >
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
-        <TextView
-            android:id="@+id/question"
+        android:orientation="horizontal">
+
+        <CheckBox
+            android:id="@+id/checkBox"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Merhaba bu bir soru metnidir"
-            android:layout_margin="10dp"/>
-        <TextView
-            android:id="@+id/attachment_path"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="attachment: storate/...//././/..////.///"
-            android:textSize="10sp"
-            android:textColor="@color/carrot"
-            android:paddingTop="5dp"/>
+            android:layout_height="match_parent"
+            android:layout_weight="8"
+            android:scaleY="1.5"
+            android:scaleX="1.5"
+            android:layout_marginLeft="5dp"
+            android:gravity="center"
+            android:layout_gravity="center"/>
+
 
         <View
-            android:id="@+id/divider"
-            android:layout_width="match_parent"
-            android:layout_height="3dp"
-            android:background="?android:attr/listDivider"/>
+            android:id="@+id/checkbox_divider"
+            android:layout_width="5dp"
+            android:layout_height="match_parent"
+            android:background="?android:attr/listDivider" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginHorizontal="10dp">
+            android:orientation="vertical"
+            android:layout_weight="1">
+            <TextView
+                android:id="@+id/question"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Merhaba bu bir soru metnidir"
+                android:layout_margin="10dp"/>
+            <TextView
+                android:id="@+id/attachment_path"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="attachment: storate/...//././/..////.///"
+                android:textSize="10sp"
+                android:textColor="@color/carrot"
+                android:paddingTop="5dp"/>
 
-            <RadioButton
-                android:id="@+id/radio_button_option_a"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/option_a"
-                android:textColor="@color/pumpkin"
-                android:textSize="15sp"
-                android:buttonTint="@color/orange"/>
-            <TextView
-                android:id="@+id/option_a"
+            <View
+                android:id="@+id/question_divider"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textSize="15sp"
-                android:text="Bu A şıkkıdır"
-                android:layout_marginLeft="3dp"
-                android:maxLines="10"/>
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginHorizontal="10dp">
-            <RadioButton
-                android:id="@+id/radio_button_option_b"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="15sp"
-                android:textColor="@color/pumpkin"
-                android:text="@string/option_b"
-                android:buttonTint="@color/orange"/>
-            <TextView
-                android:id="@+id/option_b"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textSize="15sp"
-                android:text="Bu B şıkkıdır"
-                android:layout_marginLeft="3dp"
-                android:maxLines="10"/>
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginHorizontal="10dp">
-            <RadioButton
-                android:id="@+id/radio_button_option_c"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="15sp"
-                android:textColor="@color/pumpkin"
-                android:text="@string/option_c"
-                android:buttonTint="@color/orange"/>
-            <TextView
-                android:id="@+id/option_c"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textSize="15sp"
-                android:text="Bu C şıkkıdır"
-                android:layout_marginLeft="3dp"/>
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginHorizontal="10dp">
-            <RadioButton
-                android:id="@+id/radio_button_option_d"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="15sp"
-                android:textColor="@color/pumpkin"
-                android:text="@string/option_d"
-                android:buttonTint="@color/orange"/>
-            <TextView
-                android:id="@+id/option_d"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textSize="15sp"
-                android:text="Bu D şıkkıdır"
-                android:layout_marginLeft="3dp"
-                android:maxLines="10"/>
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginHorizontal="10dp">
-            <RadioButton
-                android:id="@+id/radio_button_option_e"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="15sp"
-                android:textColor="@color/pumpkin"
-                android:text="@string/option_e"
-                android:buttonTint="@color/orange"/>
-            <TextView
-                android:id="@+id/option_e"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textSize="15sp"
-                android:text="Bu E şıkkıdır"
-                android:layout_marginLeft="3dp"
-                android:maxLines="10"/>
-        </LinearLayout>
+                android:layout_height="3dp"
+                android:background="?android:attr/listDivider"
+                android:visibility="gone"/>
 
-        <View
-            android:id="@+id/divider2"
-            android:layout_width="match_parent"
-            android:layout_height="3dp"
-            android:background="?android:attr/listDivider"/>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="64dp"
-            android:orientation="horizontal"
-            android:layout_marginHorizontal="10dp">
-            <Button
-                android:id="@+id/edit_button"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="center"
-                android:layout_weight="1"
-                android:textSize="20sp"
-                android:text="@string/edit_button"
-                android:fontFamily="sans-serif-condensed-light"
-                android:layout_marginRight="10dp"
-                android:layout_marginLeft="10dp"
-                android:drawableLeft="@drawable/ic_edit_smaller"
-                android:backgroundTint="@color/carrot"
-                android:textColor="@color/white"
-                android:paddingRight="40dp"/>
-            <Button
-                android:id="@+id/delete_button"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="center"
-                android:layout_weight="1"
-                android:textSize="20sp"
-                android:text="@string/delete_button"
-                android:fontFamily="sans-serif-condensed-light"
-                android:backgroundTint="#D52F59"
-                android:textColor="@color/white"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:drawableLeft="@drawable/ic_delete_smaller"
-                android:paddingRight="20dp"/>
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginHorizontal="10dp">
 
+                <RadioButton
+                    android:id="@+id/radio_button_option_a"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/option_a"
+                    android:textColor="@color/pumpkin"
+                    android:textSize="15sp"
+                    android:buttonTint="@color/orange"/>
+                <TextView
+                    android:id="@+id/option_a"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="15sp"
+                    android:text="Bu A şıkkıdır"
+                    android:layout_marginLeft="3dp"
+                    android:maxLines="10"/>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginHorizontal="10dp">
+                <RadioButton
+                    android:id="@+id/radio_button_option_b"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="15sp"
+                    android:textColor="@color/pumpkin"
+                    android:text="@string/option_b"
+                    android:buttonTint="@color/orange"/>
+                <TextView
+                    android:id="@+id/option_b"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="15sp"
+                    android:text="Bu B şıkkıdır"
+                    android:layout_marginLeft="3dp"
+                    android:maxLines="10"/>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginHorizontal="10dp">
+                <RadioButton
+                    android:id="@+id/radio_button_option_c"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="15sp"
+                    android:textColor="@color/pumpkin"
+                    android:text="@string/option_c"
+                    android:buttonTint="@color/orange"/>
+                <TextView
+                    android:id="@+id/option_c"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="15sp"
+                    android:text="Bu C şıkkıdır"
+                    android:layout_marginLeft="3dp"/>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginHorizontal="10dp">
+                <RadioButton
+                    android:id="@+id/radio_button_option_d"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="15sp"
+                    android:textColor="@color/pumpkin"
+                    android:text="@string/option_d"
+                    android:buttonTint="@color/orange"/>
+                <TextView
+                    android:id="@+id/option_d"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="15sp"
+                    android:text="Bu D şıkkıdır"
+                    android:layout_marginLeft="3dp"
+                    android:maxLines="10"/>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginHorizontal="10dp">
+                <RadioButton
+                    android:id="@+id/radio_button_option_e"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="15sp"
+                    android:textColor="@color/pumpkin"
+                    android:text="@string/option_e"
+                    android:buttonTint="@color/orange"/>
+                <TextView
+                    android:id="@+id/option_e"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="15sp"
+                    android:text="Bu E şıkkıdır"
+                    android:layout_marginLeft="3dp"
+                    android:maxLines="10"/>
+            </LinearLayout>
+
+            <View
+                android:id="@+id/buttons_divider"
+                android:layout_width="match_parent"
+                android:layout_height="3dp"
+                android:background="?android:attr/listDivider"
+                android:visibility="gone"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="64dp"
+                android:orientation="horizontal"
+                android:layout_marginHorizontal="10dp"
+                android:visibility="gone">
+                <Button
+                    android:id="@+id/edit_button"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:layout_weight="1"
+                    android:textSize="20sp"
+                    android:text="@string/edit_button"
+                    android:fontFamily="sans-serif-condensed-light"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginLeft="10dp"
+                    android:drawableLeft="@drawable/ic_edit_smaller"
+                    android:backgroundTint="@color/carrot"
+                    android:textColor="@color/white"
+                    android:paddingRight="40dp"/>
+                <Button
+                    android:id="@+id/delete_button"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:layout_weight="1"
+                    android:textSize="20sp"
+                    android:text="@string/delete_button"
+                    android:fontFamily="sans-serif-condensed-light"
+                    android:backgroundTint="#D52F59"
+                    android:textColor="@color/white"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:drawableLeft="@drawable/ic_delete_smaller"
+                    android:paddingRight="20dp"/>
+
+            </LinearLayout>
         </LinearLayout>
     </LinearLayout>
-
 </androidx.cardview.widget.CardView>
