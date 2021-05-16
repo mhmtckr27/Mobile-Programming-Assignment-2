@@ -170,15 +170,12 @@ public class MenuActivity extends AppCompatActivity {
     private void readQuestionsFromFile() {
         FileInputStream fis = null;
         try {
-            /*File questionsFile = new File(getApplicationContext().getFilesDir() + "/Questions/" + MenuActivity.currentUser.getEmail() + "/questions");
-            questionsFile.createNewFile();*/
             fis = new FileInputStream(getApplicationContext().getFilesDir() + "/Questions/" + MenuActivity.currentUser.getEmail() + "/questions");
             ObjectInputStream is = new ObjectInputStream(fis);;
             try{
                 while(true){
                     Question question = (Question) is.readObject();
                     questions.add(question);
-                    //fis = new FileInputStream(getApplicationContext().getFilesDir() + "/Questions/" + MenuActivity.currentUser.getEmail() + "/questions");
                 }
             }
             catch (EOFException e){

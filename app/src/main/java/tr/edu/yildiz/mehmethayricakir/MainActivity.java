@@ -6,6 +6,8 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -110,6 +112,55 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        email.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if(currentLoginAttemptCount >= maxLoginAttemptCount){
+                    login.setEnabled(false);
+                }
+                else if(s.toString().equals("")){
+                    login.setEnabled(false);
+                }
+                else if(!password.getText().toString().equals("")){
+                    login.setEnabled(true);
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+            }
+        });
+
+        password.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if(currentLoginAttemptCount >= maxLoginAttemptCount){
+                    login.setEnabled(false);
+                }
+                else if(s.toString().equals("")){
+                    login.setEnabled(false);
+                }
+                else if(!email.getText().toString().equals("")){
+                    login.setEnabled(true);
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
     }
 
     private void onLoginAttempt(View view){
@@ -117,18 +168,20 @@ public class MainActivity extends AppCompatActivity {
         if(getUserIndex() != -1){
             //loginsuccessfull
             currentLoginAttemptCount = 0;
-            Toast.makeText(MainActivity.this, "Welcome onboard " + email.getText().toString() + "!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(MainActivity.this, "Welcome aboard " + email.getText().toString() + "!", Toast.LENGTH_SHORT).show();
             Intent intent = new Intent(view.getContext(), MenuActivity.class);
             intent.putExtra("userIndex", userIndex);
             startActivityForResult(intent,1);
             finish();
         }
         else{
-            password.setText("");
             Toast.makeText(this, "Wrong e-mail and/or password!", Toast.LENGTH_SHORT).show();
             currentLoginAttemptCount++;
             if(currentLoginAttemptCount >= maxLoginAttemptCount){
                 login.setEnabled(false);
+                Intent intent = new Intent(view.getContext(), SignupActivity.class);
+                intent.putExtra("emailAddress", email.getText().toString());
+                startActivity(intent);
             }
         }
     }

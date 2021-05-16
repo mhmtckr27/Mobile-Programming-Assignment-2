@@ -112,6 +112,7 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.UserVi
     @Override
     public void onBindViewHolder(@NonNull UserViewHolder holder, int position) {
         if(isCreatingExamList){
+            Question tempQuestion = new Question("","","","","","","",0);
             holder.question.setText(questions.get(position).getQuestion());
 
             for(int i = 4; i > difficulty - 1; i--){
@@ -144,14 +145,17 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.UserVi
                 if(string.equals(questions.get(position).options.get(questions.get(position).correctOptionIndex))){
                     holder.optionsRadioButtons[newOptions.indexOf(string)].setChecked(true);
                     holder.optionsRadioButtons[newOptions.indexOf(string)].setButtonTintList(context.getColorStateList(R.color.orange));
+                    tempQuestion.setCorrectOptionIndex(newOptions.indexOf(string));
                 }
             }
 
             String attachmentPathText = "attachment: " + questions.get(position).getAttachmentPath();
+            tempQuestion.setAttachmentPath("attachment: " + questions.get(position).getAttachmentPath());
             holder.attachmentPath.setText(attachmentPathText);
             if(holder.attachmentPath.getText().toString().equals("attachment: ")){
                 holder.attachmentPath.setVisibility(GONE);
                 holder.buttonsDivider.setVisibility(GONE);
+                tempQuestion.setAttachmentPath("");
             }
 
             holder.checkboxDivider.setVisibility(View.VISIBLE);
@@ -159,16 +163,22 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.UserVi
             holder.buttonsLinearLayout.setVisibility(GONE);
 
             holder.cardView.setBackgroundColor(context.getResources().getColor(R.color.question_deselected));
+
+            tempQuestion.setQuestion(questions.get(position).getQuestion());
+            tempQuestion.setOptions(new ArrayList<String>(newOptions));
+
             holder.addQuestionToExamCheckBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                 @Override
                 public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                     if(isChecked){
                         holder.cardView.setBackgroundColor(context.getResources().getColor(R.color.question_selected));
                         AddExamFragment.currentSelectedQuestionCount++;
+                        AddExamFragment.currentSelectedQuestions.add(tempQuestion);
                     }
                     else{
                         holder.cardView.setBackgroundColor(context.getResources().getColor(R.color.question_deselected));
                         AddExamFragment.currentSelectedQuestionCount--;
+                        AddExamFragment.currentSelectedQuestions.remove(tempQuestion);
                     }
                 }
             });
