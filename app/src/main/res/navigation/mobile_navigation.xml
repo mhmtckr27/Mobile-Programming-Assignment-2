@@ -12,14 +12,22 @@
         tools:layout="@layout/fragment_home" />
 
     <fragment
-        android:id="@+id/nav_gallery"
-        android:name="tr.edu.yildiz.mehmethayricakir.ui.gallery.GalleryFragment"
-        android:label="@string/menu_gallery"
-        tools:layout="@layout/fragment_gallery" />
+        android:id="@+id/nav_add_question"
+        android:name="tr.edu.yildiz.mehmethayricakir.ui.addquestion.AddQuestionFragment"
+        android:label="@string/add_question"
+        tools:layout="@layout/fragment_gallery">
+    </fragment>
 
     <fragment
-        android:id="@+id/nav_slideshow"
-        android:name="tr.edu.yildiz.mehmethayricakir.ui.slideshow.SlideshowFragment"
-        android:label="@string/menu_slideshow"
+        android:id="@+id/nav_list_questions"
+        android:name="tr.edu.yildiz.mehmethayricakir.ui.listquestions.ListQuestionsFragment"
+        android:label="@string/list_questions"
         tools:layout="@layout/fragment_slideshow" />
+
+    <fragment
+        android:id="@+id/nav_exam_prefs"
+        android:name="tr.edu.yildiz.mehmethayricakir.ui.exampreferences.ExamPreferencesFragment"
+        android:label="@string/exam_prefs"
+        tools:layout="@layout/fragment_exam_preferences"
+        />
 </navigation>

@@ -1,14 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:layout_marginHorizontal="20dp"
-    android:gravity="center"
     tools:context="tr.edu.yildiz.mehmethayricakir.AddQuestionActivity">
 
+<LinearLayout
+    android:id="@+id/linear_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:layout_marginHorizontal="20dp"
+    android:paddingTop="30dp"
+    android:paddingBottom="30dp">
 
     <EditText
         android:id="@+id/question_edit_text"
@@ -16,7 +22,9 @@
         android:layout_height="wrap_content"
         android:textSize="20sp"
         android:hint="@string/question_edit_text_hint"
-        android:maxLines="5"/>
+        android:maxLines="5"
+        android:inputType="text"
+        android:layout_marginTop="30dp"/>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -35,7 +43,8 @@
             android:layout_marginHorizontal="5dp"
             android:textSize="20sp"
             android:hint="@string/option_a_edit_text_hint"
-            android:maxLines="2"/>
+            android:maxLines="2"
+            android:inputType="text"/>
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
@@ -54,7 +63,8 @@
             android:layout_marginHorizontal="5dp"
             android:textSize="20sp"
             android:hint="@string/option_b_edit_text_hint"
-            android:maxLines="2"/>
+            android:maxLines="2"
+            android:inputType="text"/>
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
@@ -73,7 +83,8 @@
             android:layout_marginHorizontal="5dp"
             android:textSize="20sp"
             android:hint="@string/option_c_edit_text_hint"
-            android:maxLines="2"/>
+            android:maxLines="2"
+            android:inputType="text"/>
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
@@ -92,7 +103,8 @@
             android:layout_marginHorizontal="5dp"
             android:textSize="20sp"
             android:hint="@string/option_d_edit_text_hint"
-            android:maxLines="2"/>
+            android:maxLines="2"
+            android:inputType="text"/>
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
@@ -111,7 +123,8 @@
             android:layout_marginHorizontal="5dp"
             android:textSize="20sp"
             android:hint="@string/option_e_edit_text_hint"
-            android:maxLines="2"/>
+            android:maxLines="2"
+            android:inputType="text"/>
     </LinearLayout>
     <TextView
         android:layout_width="match_parent"
@@ -179,6 +192,17 @@
 
         </RadioGroup>
     </LinearLayout>
+
+    <ImageView
+        android:id="@+id/attachment_image"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <VideoView
+        android:id="@+id/attachment_video"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
     <TextView
         android:id="@+id/attached_file_name_text"
         android:layout_width="match_parent"
@@ -187,17 +211,19 @@
         android:layout_marginHorizontal="60dp"
         android:text=""
         android:textSize="12sp"/>
+
     <Button
         android:id="@+id/attach_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="60dp"
         android:drawableLeft="@drawable/attach"
+        android:fontFamily="sans-serif-condensed-light"
         android:paddingLeft="35dp"
         android:text="@string/attach_button_text"
-        android:fontFamily="sans-serif-condensed-light"
+        android:textAlignment="textStart"
         android:textSize="30sp"
-        android:textAlignment="textStart"/>
+        android:visibility="visible" />
 
     <Button
         android:id="@+id/add_question_button"
@@ -207,4 +233,6 @@
         android:textSize="30sp"
         android:text="@string/add_question_button"
         android:fontFamily="sans-serif-condensed-light"/>
+
 </LinearLayout>
+</ScrollView>

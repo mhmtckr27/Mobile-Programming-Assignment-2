@@ -10,8 +10,10 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.RadioGroup;
 import android.widget.TextView;
+import android.widget.VideoView;
 
 import java.util.ArrayList;
 
@@ -22,8 +24,10 @@ public class AddQuestionActivity extends AppCompatActivity {
     EditText optionC;
     EditText optionD;
     EditText optionE;
-    Button attach;
+    ImageView attachedImage;
+    VideoView attachedVideo;
     TextView attachedFileName;
+    Button attach;
     RadioGroup correctOption;
     Button addQuestion;
     static final int ATTACH_FILE = 1;
@@ -34,7 +38,7 @@ public class AddQuestionActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add_question);
+        setContentView(R.layout.fragment_add_question);
 
         bindVariables();
         bindButtons();
@@ -79,7 +83,7 @@ public class AddQuestionActivity extends AppCompatActivity {
                         correctOptionIndex = -1;
                         break;
                 }
-                questions.add(new Question(question.getText().toString(), new String[]{ optionA.getText().toString(), optionB.getText().toString(), optionC.getText().toString(), optionD.getText().toString(), optionE.getText().toString() }, uri, correctOptionIndex));
+                //questions.add(new Question(question.getText().toString(), new String[]{ optionA.getText().toString(), optionB.getText().toString(), optionC.getText().toString(), optionD.getText().toString(), optionE.getText().toString() }, , correctOptionIndex));
             }
         });
     }

@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.os.Bundle;
 
 import java.util.ArrayList;
-
+/*
 public class RecyclerViewActivity extends AppCompatActivity {
     RecyclerView.LayoutManager layoutManager;
     RecyclerView recyclerView;
@@ -16,7 +16,7 @@ public class RecyclerViewActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_recycler_view);
+        setContentView(R.layout.fragment_list_questions);
 
         bindVariables();
     }
@@ -26,6 +26,6 @@ public class RecyclerViewActivity extends AppCompatActivity {
         layoutManager = new LinearLayoutManager(getApplicationContext());
         recyclerView.setLayoutManager(layoutManager);
         users = MainActivity.users;
-        recyclerView.setAdapter(new UserAdapter(getApplicationContext(), users));
+        recyclerView.setAdapter(new QuestionAdapter(getApplicationContext(), users));
     }
-}
+}*/

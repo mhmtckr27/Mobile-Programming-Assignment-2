@@ -1,17 +1,27 @@
 package tr.edu.yildiz.mehmethayricakir;
 
-import android.net.Uri;
+import java.io.Serializable;
 
-public class Question {
+public class Question implements Serializable {
+    private static final long serialVersionUID = 6529685098167757690L;
     String question;
-    String[] options;
+    String optionA;
+    String optionB;
+    String optionC;
+    String optionD;
+    String optionE;
     int correctOptionIndex;
-    Uri uri;
+    String attachmentPath;
 
-    public Question(String question, String[] options, Uri uri, int correctOptionIndex) {
+    public Question(String question, String optionA, String optionB, String optionC, String optionD, String optionE, String attachmentPath, int correctOptionIndex) {
         this.question = question;
-        this.options = options;
-        this.uri = uri;
+        this.optionA = optionA;
+        this.optionB = optionB;
+        this.optionC = optionC;
+        this.optionD = optionD;
+        this.optionE = optionE;
+
+        this.attachmentPath = attachmentPath;
         this.correctOptionIndex = correctOptionIndex;
     }
 
@@ -23,12 +33,44 @@ public class Question {
         this.question = question;
     }
 
-    public String[] getOptions() {
-        return options;
+    public String getOptionA() {
+        return optionA;
     }
 
-    public void setOptions(String[] options) {
-        this.options = options;
+    public void setOptionA(String optionA) {
+        this.optionA = optionA;
+    }
+
+    public String getOptionB() {
+        return optionB;
+    }
+
+    public void setOptionB(String optionB) {
+        this.optionB = optionB;
+    }
+
+    public String getOptionC() {
+        return optionC;
+    }
+
+    public void setOptionC(String optionC) {
+        this.optionC = optionC;
+    }
+
+    public String getOptionD() {
+        return optionD;
+    }
+
+    public void setOptionD(String optionD) {
+        this.optionD = optionD;
+    }
+
+    public String getOptionE() {
+        return optionE;
+    }
+
+    public void setOptionE(String optionE) {
+        this.optionE = optionE;
     }
 
     public int getCorrectOptionIndex() {
@@ -39,11 +81,11 @@ public class Question {
         this.correctOptionIndex = correctOptionIndex;
     }
 
-    public Uri getUri() {
-        return uri;
+    public String getAttachmentPath() {
+        return attachmentPath;
     }
 
-    public void setUri(Uri uri) {
-        this.uri = uri;
+    public void setAttachmentPath(String attachmentPath) {
+        this.attachmentPath = attachmentPath;
     }
 }

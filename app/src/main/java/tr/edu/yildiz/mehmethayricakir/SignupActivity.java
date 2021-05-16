@@ -209,25 +209,15 @@ public class SignupActivity extends AppCompatActivity implements Serializable {
 
                 String photoPath = getApplicationContext().getFilesDir() + "/Photos/" + email.getText().toString() + ".png";
                 User user = new User(name.getText().toString(), surname.getText().toString(), email.getText().toString(), phoneNumber.getText().toString(), new Date(year, month, day), md5(password.getText().toString()), photoPath);
-                if (copyUserPhoto()) return;
+                if (!copyUserPhoto()){
+                    return;
+                }
 
                 if(addUser(user)){
                     Toast.makeText(SignupActivity.this, "Signup successful!", Toast.LENGTH_SHORT).show();
                     MainActivity.users.add(user);
                     Intent intent = new Intent(SignupActivity.this, MainActivity.class);
                     startActivity(intent);
-                    /*Thread thread = new Thread(){
-                        @Override
-                        public void run() {
-                            try {
-                                Thread.sleep(Toast.LENGTH_SHORT);
-                                SignupActivity.this.finish();
-                            } catch (Exception e) {
-                                e.printStackTrace();
-                            }
-                        }
-                    };
-                    thread.start();*/
                     finish();
                 }
                 else{
@@ -244,9 +234,9 @@ public class SignupActivity extends AppCompatActivity implements Serializable {
         catch (Exception e){
             e.printStackTrace();
             Toast.makeText(SignupActivity.this, "Signup failed! (Select photo error)", Toast.LENGTH_SHORT).show();
-            return true;
+            return false;
         }
-        return false;
+        return true;
     }
 
     public boolean addUser(User user){

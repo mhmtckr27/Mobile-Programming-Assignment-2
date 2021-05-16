@@ -11,16 +11,22 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import java.io.BufferedInputStream;
+import java.io.BufferedReader;
 import java.io.EOFException;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.Date;
+
+import static tr.edu.yildiz.mehmethayricakir.MenuActivity.questions;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -28,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
     EditText password;
     Button login;
     Button signup;
-    static ArrayList<User> users;
+    static ArrayList<User> users = new ArrayList<>();
     int currentLoginAttemptCount = 0;
     int maxLoginAttemptCount = 3;
 
@@ -39,27 +45,44 @@ public class MainActivity extends AppCompatActivity {
 
         bindVariables();
         bindButtons();
-        if(users == null){
-            users = createUsers();
-        }
-        readUsersFromFile();
+
         File photosDirectory = new File(getApplicationContext().getFilesDir() + "/Photos");
+        File questionsDirectory = new File(getApplicationContext().getFilesDir() + "/Questions");
         if(!photosDirectory.exists()){
             photosDirectory.mkdir();
         }
-    }
+        if(!questionsDirectory.exists()){
+            questionsDirectory.mkdir();
+        }
 
+        users.clear();
+        readUsersFromFile();
+        System.out.println("before:" + users.size());
+        if(users == null || users.size() == 0){
+            users = createUsers();
+        }
+
+        System.out.println("after:" + users.size());
+    }
     private void readUsersFromFile() {
         FileInputStream fis = null;
         try {
+            File usersFile = new File(getApplicationContext().getFilesDir() + "/users");
+            usersFile.createNewFile();
             fis = new FileInputStream(getApplicationContext().getFilesDir() + "/users");
-            ObjectInputStream is = new ObjectInputStream(fis);
+            ObjectInputStream is = null;
             try{
-                User user = (User) is.readObject();
-                users.add(user);
+                while(true){
+                    is = new ObjectInputStream(fis);
+                    User user = (User) is.readObject();
+                    System.out.println(user.getEmail());
+                    users.add(user);
+                }
             }catch (EOFException e){
                 e.printStackTrace();
-                is.close();
+                if (is != null) {
+                    is.close();
+                }
                 fis.close();
             }
         } catch (ClassNotFoundException | IOException e) {
@@ -89,7 +112,6 @@ public class MainActivity extends AppCompatActivity {
                 Intent intent = new Intent(v.getContext(), SignupActivity.class);
                 intent.putExtra("emailAddress", email.getText().toString());
                 startActivity(intent);
-                finish();
             }
         });
     }
@@ -125,38 +147,73 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public ArrayList<User> createUsers() {
-        users = new ArrayList<>();
-        users.add(new User("Feyyaz", "Yiğit", "feyyazyigit@gmail.com", "5431234567", new Date(), User.md5("sevgi"), getApplicationContext().getFilesDir() + "/Photos/feyyaz.png"));
-        copyUserPhoto(R.drawable.feyyaz, getApplicationContext().getFilesDir() + "/Photos/feyyaz.png");
 
-        users.add(new User("Amanda", "Schiavone", "amyy@gmail.com", "3265002545", new Date(), User.md5("scamand1992"), getApplicationContext().getFilesDir() + "/Photos/amanda.png"));
-        copyUserPhoto(R.drawable.amanda, getApplicationContext().getFilesDir() + "/Photos/amanda.png");
+        User newUser = new User("Feyyaz", "Yiğit", "feyyazyigit@gmail.com", "5431234567", new Date(), User.md5("sevgi"), getApplicationContext().getFilesDir() + "/Photos/feyyazyigit@gmail.com.png");
+        users.add(newUser);
+        copyUserPhoto(R.drawable.feyyaz, getApplicationContext().getFilesDir() + "/Photos/feyyazyigit@gmail.com.png");
+        addUser(newUser);
 
-        users.add(new User("Atreus", "the Demigod", "atreusthearcher@gmail.com", "5963211236", new Date(), User.md5("whymydadhatesme"), getApplicationContext().getFilesDir() + "/Photos/atreus.png"));
-        copyUserPhoto(R.drawable.atreus, getApplicationContext().getFilesDir() + "/Photos/atreus.png");
+        newUser = new User("Amanda", "Schiavone", "amyy@gmail.com", "3265002545", new Date(), User.md5("scamand1992"), getApplicationContext().getFilesDir() + "/Photos/amyy@gmail.com.png");
+        users.add(newUser);
+        copyUserPhoto(R.drawable.amanda, getApplicationContext().getFilesDir() + "/Photos/amyy@gmail.com.png");
+        addUser(newUser);
 
-        users.add(new User("Kratos", "the God", "kratos@gmail.com", "7456952312", new Date(), User.md5("imissmywife"), getApplicationContext().getFilesDir() + "/Photos/kratos.png"));
-        copyUserPhoto(R.drawable.kratos, getApplicationContext().getFilesDir() + "/Photos/kratos.png");
+        newUser = new User("Atreus", "the Demigod", "atreusthearcher@gmail.com", "5963211236", new Date(), User.md5("whymydadhatesme"), getApplicationContext().getFilesDir() + "/Photos/atreusthearcher@gmail.com.png");
+        users.add(newUser);
+        copyUserPhoto(R.drawable.atreus, getApplicationContext().getFilesDir() + "/Photos/atreusthearcher@gmail.com.png");
+        addUser(newUser);
 
-        users.add(new User("Freya", "the Goddess", "freya@gmail.com", "5496322585", new Date(), User.md5("mydearbaldur"), getApplicationContext().getFilesDir() + "/Photos/freya.png"));
-        copyUserPhoto(R.drawable.freya, getApplicationContext().getFilesDir() + "/Photos/freya.png");
+        newUser = new User("Kratos", "the God", "kratos@gmail.com", "7456952312", new Date(), User.md5("imissmywife"), getApplicationContext().getFilesDir() + "/Photos/kratos@gmail.com.png");
+        users.add(newUser);
+        copyUserPhoto(R.drawable.kratos, getApplicationContext().getFilesDir() + "/Photos/kratos@gmail.com.png");
+        addUser(newUser);
 
-        users.add(new User("Geralt", "of Rivia", "geralt@gmail.com", "1285632145", new Date(), User.md5("trissciriroach"), getApplicationContext().getFilesDir() + "/Photos/geraltofrivia.png"));
-        copyUserPhoto(R.drawable.geraltofrivia, getApplicationContext().getFilesDir() + "/Photos/geraltofrivia.png");
+        newUser = new User("Freya", "the Goddess", "freya@gmail.com", "5496322585", new Date(), User.md5("mydearbaldur"), getApplicationContext().getFilesDir() + "/Photos/freya@gmail.com.png");
+        users.add(newUser);
+        copyUserPhoto(R.drawable.freya, getApplicationContext().getFilesDir() + "/Photos/freya@gmail.com.png");
+        addUser(newUser);
 
-        users.add(new User("Joel", "Miller", "miller.joel@gmail.com", "5463214587", new Date(), User.md5("sarahellie"), getApplicationContext().getFilesDir() + "/Photos/joelmiller.png"));
-        copyUserPhoto(R.drawable.joelmiller, getApplicationContext().getFilesDir() + "/Photos/joelmiller.png");
+        newUser = new User("Geralt", "of Rivia", "geralt@gmail.com", "1285632145", new Date(), User.md5("trissciriroach"), getApplicationContext().getFilesDir() + "/Photos/geralt@gmail.com.png");
+        users.add(newUser);
+        copyUserPhoto(R.drawable.geraltofrivia, getApplicationContext().getFilesDir() + "/Photos/geralt@gmail.com.png");
+        addUser(newUser);
 
-        users.add(new User("Johnny", "Silverhand", "silverhandjohnny@gmail.com", "7456542136", new Date(), User.md5("arasakamustdie"), getApplicationContext().getFilesDir() + "/Photos/johnnysilverhand.png"));
-        copyUserPhoto(R.drawable.johnnysilverhand, getApplicationContext().getFilesDir() + "/Photos/johnnysilverhand.png");
+        newUser = new User("Joel", "Miller", "miller.joel@gmail.com", "5463214587", new Date(), User.md5("sarahellie"), getApplicationContext().getFilesDir() + "/Photos/miller.joel@gmail.com.png");
+        users.add(newUser);
+        copyUserPhoto(R.drawable.joelmiller, getApplicationContext().getFilesDir() + "/Photos/miller.joel@gmail.com.png");
+        addUser(newUser);
 
-        users.add(new User("Walter", "White", "castersugar7_24@gmail.com", "2561455222", new Date(), User.md5("mrheisenberg"), getApplicationContext().getFilesDir() + "/Photos/walterwhite.png"));
-        copyUserPhoto(R.drawable.walterwhite, getApplicationContext().getFilesDir() + "/Photos/walterwhite.png");
+        newUser = new User("Johnny", "Silverhand", "silverhandjohnny@gmail.com", "7456542136", new Date(), User.md5("arasakamustdie"), getApplicationContext().getFilesDir() + "/Photos/silverhandjohnny@gmail.com.png");
+        users.add(newUser);
+        copyUserPhoto(R.drawable.johnnysilverhand, getApplicationContext().getFilesDir() + "/Photos/silverhandjohnny@gmail.com.png");
+        addUser(newUser);
 
-        users.add(new User("Panam", "Palmer", "panam@gmail.com", "5426589666", new Date(), User.md5("nomadlife4ever"), getApplicationContext().getFilesDir() + "/Photos/panampalmer.png"));
-        copyUserPhoto(R.drawable.panampalmer, getApplicationContext().getFilesDir() + "/Photos/panampalmer.png");
+        newUser = new User("Walter", "White", "castersugar7_24@gmail.com", "2561455222", new Date(), User.md5("mrheisenberg"), getApplicationContext().getFilesDir() + "/Photos/castersugar7_24@gmail.com.png");
+        users.add(newUser);
+        copyUserPhoto(R.drawable.walterwhite, getApplicationContext().getFilesDir() + "/Photos/castersugar7_24@gmail.com.png");
+        addUser(newUser);
+
+        newUser = new User("Panam", "Palmer", "panam@gmail.com", "5426589666", new Date(), User.md5("nomadlife4ever"), getApplicationContext().getFilesDir() + "/Photos/panam@gmail.com.png");
+        users.add(newUser);
+        copyUserPhoto(R.drawable.panampalmer, getApplicationContext().getFilesDir() + "/Photos/anam@gmail.com.png");
+        addUser(newUser);
 
         return users;
+    }
+
+    public boolean addUser(User user){
+        FileOutputStream fos = null;
+        try {
+            fos = new FileOutputStream(getApplicationContext().getFilesDir() + "/users", true);
+            ObjectOutputStream os = new ObjectOutputStream(fos);
+            os.writeObject(user);
+            os.close();
+            fos.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+            return false;
+        }
+        return true;
     }
 
     //hardcoded createUsers fonksiyonu icin eklendi, createUsers silinince bu ve copy fonksiyonu da silinebilir.

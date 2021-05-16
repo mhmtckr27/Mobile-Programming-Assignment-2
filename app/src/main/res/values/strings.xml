@@ -47,4 +47,17 @@
     <string name="menu_gallery">Gallery</string>
     <string name="menu_slideshow">Slideshow</string>
     <string name="logout">Log out</string>
+    <string name="edit_button">EDIT</string>
+    <string name="delete_button">DELETE</string>
+    <string name="add_question">Add Question</string>
+    <string name="list_questions">List Questions</string>
+    <string name="exam_prefs">Exam Preferences</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="exam_duration_hint">Exam duration in minutes</string>
+    <string name="exam_duration">Exam Duration</string>
+    <string name="question_points_hint">Points per question</string>
+    <string name="question_points">Question Points</string>
+    <string name="question_difficulty">Question Difficulty</string>
+    <string name="save_exam_prefs">SAVE</string>
 </resources>

@@ -23,12 +23,39 @@
 
     <include layout="@layout/content_main" />
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fab"
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
-        android:layout_margin="@dimen/fab_margin"
-        app:srcCompat="@android:drawable/ic_dialog_email" />
-
+        android:orientation="vertical"
+        android:layout_gravity="bottom|end">
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fab_e"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end"
+            android:layout_marginRight="@dimen/fab_margin"
+            android:src="@drawable/ic_e"
+            android:backgroundTint="@color/carrot"
+            android:visibility="gone"/>
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fab_q"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end"
+            android:layout_marginRight="@dimen/fab_margin"
+            android:layout_marginTop="10dp"
+            android:src="@drawable/ic_q"
+            android:backgroundTint="@color/carrot"
+            android:visibility="gone"/>
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end"
+            android:layout_marginRight="@dimen/fab_margin"
+            android:layout_marginBottom="@dimen/fab_margin"
+            android:layout_marginTop="10dp"
+            android:src="@drawable/ic_plus"
+            android:backgroundTint="@color/pumpkin"/>
+    </LinearLayout>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
