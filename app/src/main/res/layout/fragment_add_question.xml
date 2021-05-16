@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="tr.edu.yildiz.mehmethayricakir.AddQuestionActivity">
+    tools:context="tr.edu.yildiz.mehmethayricakir.MenuActivity">
 
 <LinearLayout
     android:id="@+id/linear_layout"
